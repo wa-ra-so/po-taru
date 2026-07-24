@@ -36,15 +36,12 @@ body{
   transition:opacity .5s var(--ease), visibility .5s var(--ease);
 }
 .intro.hide{opacity:0;visibility:hidden;pointer-events:none;}
-.intro-mark{width:19vw;max-width:96px;min-width:52px;opacity:0;transform:translateY(10px) scale(.85);
-  animation:markReveal .5s var(--ease) forwards;animation-delay:.92s;
-}
 .intro-word{display:flex;font-size:clamp(34px,10vw,72px);font-weight:900;letter-spacing:-.01em;}
-.intro-word .ch{display:inline-block;opacity:0;animation:tumbleIn .68s cubic-bezier(.22,.9,.3,1.1) forwards;}
-.intro-word .ch:nth-child(1){animation-delay:.02s;}
-.intro-word .ch:nth-child(2){animation-delay:.13s;}
-.intro-word .ch:nth-child(3){animation-delay:.24s;}
-.intro-word .ch:nth-child(4){animation-delay:.35s;}
+.intro-word .ch{display:inline-block;opacity:0;animation:tumbleIn 1s cubic-bezier(.22,.9,.3,1.1) forwards;}
+.intro-word .ch:nth-child(1){animation-delay:.05s;}
+.intro-word .ch:nth-child(2){animation-delay:.32s;}
+.intro-word .ch:nth-child(3){animation-delay:.59s;}
+.intro-word .ch:nth-child(4){animation-delay:.86s;}
 
 @keyframes tumbleIn{
   0%{opacity:0;transform:translate(-50px,-70px) rotate(-75deg) scale(.45);}
@@ -52,7 +49,6 @@ body{
   78%{opacity:1;transform:translate(-2px,-1px) rotate(-6deg) scale(.98);}
   100%{opacity:1;transform:translate(0,0) rotate(0) scale(1);}
 }
-@keyframes markReveal{to{opacity:1;transform:translateY(0) scale(1);}}
 
 /* ── SPLIT ── */
 .split{
@@ -124,17 +120,6 @@ body{
 <body>
 
   <div class="intro" id="intro">
-    <svg class="intro-mark" viewBox="0 0 200 200" fill="none" stroke="var(--orange-2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 176 L112 76"/>
-      <path d="M36 160 L100 90"/>
-      <path d="M92,82 Q88,64 100,60 Q108,58 108,70"/>
-      <path d="M106,70 Q104,52 116,48 Q124,46 123,59"/>
-      <path d="M120,60 Q119,42 131,39 Q138,37 137,50"/>
-      <path d="M92,82 Q102,94 120,92 Q134,90 140,76"/>
-      <path d="M80,90 Q70,98 72,111 Q74,121 86,119 Q98,117 102,105"/>
-      <path d="M140,76 Q152,90 148,107"/>
-      <path d="M136,110 Q144,102 152,109 Q159,116 167,109 Q175,102 182,109 L188,137 Q190,149 179,153 L148,159 Q136,157 134,145 Z"/>
-    </svg>
     <div class="intro-word">
       <span class="ch">食</span><span class="ch">べ</span><span class="ch">ロ</span><span class="ch">グ</span>
     </div>
@@ -184,7 +169,7 @@ body{
     intro.classList.add('hide');
     sessionStorage.setItem('portalIntroPlayed', '1');
     setTimeout(function(){ intro.style.display = 'none'; }, 520);
-  }, 1750);
+  }, 2400);
 })();
 </script>
 </body>
