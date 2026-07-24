@@ -81,7 +81,15 @@ body{
   display:flex;align-items:flex-end;color:#fff;text-decoration:none;overflow:hidden;
   transition:flex-grow .45s var(--ease);
 }
-@media(min-width:760px){.panel:hover{flex-grow:1.28;}}
+.panel::before{
+  content:"";position:absolute;inset:0;z-index:2;background:#000;opacity:0;
+  pointer-events:none;transition:opacity .45s var(--ease);
+}
+@media(min-width:760px){
+  .panel:hover{flex-grow:1.28;}
+  .split:has(.panel-orange:hover) .panel-white::before{opacity:.4;}
+  .split:has(.panel-white:hover) .panel-orange::before{opacity:.4;}
+}
 
 .panel-white{color:var(--ink);}
 
