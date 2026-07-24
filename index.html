@@ -9,185 +9,136 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --orange-1:#FF8A3D;
+  --orange-1:#FF7A33;
   --orange-2:#FF5A1F;
-  --orange-3:#E8460D;
-  --navy-1:#233152;
-  --navy-2:#141D33;
-  --navy-3:#0B1120;
+  --orange-3:#D93F0A;
+  --navy-1:#1B2540;
+  --navy-2:#101830;
+  --navy-3:#080D1C;
   --ink:#12172A;
   --sub:#6b7280;
   --faint:#e7e5e4;
   --paper:#FAF9F7;
   --ease:cubic-bezier(.16,1,.3,1);
 }
-html{-webkit-font-smoothing:antialiased;}
+html,body{height:100%;}
 body{
-  font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--ink);min-height:100vh;
-  background:
-    radial-gradient(720px 420px at 50% -8%, rgba(255,90,31,.10), rgba(255,90,31,0) 70%),
-    radial-gradient(600px 380px at 90% 10%, rgba(35,49,82,.06), rgba(35,49,82,0) 70%),
-    var(--paper);
-  background-attachment:fixed;
-}
-/* faint dot grid texture */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:radial-gradient(rgba(18,23,42,.05) 1px, transparent 1px);
-  background-size:22px 22px;
-  mask-image:radial-gradient(ellipse 900px 500px at 50% 0%, #000 40%, transparent 78%);
-  -webkit-mask-image:radial-gradient(ellipse 900px 500px at 50% 0%, #000 40%, transparent 78%);
+  font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--ink);
+  background:var(--paper);
+  min-height:100vh;display:flex;flex-direction:column;
 }
 
-.stage{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:88px 22px 56px;}
-
-/* ── HERO ── */
-.hero{text-align:center;margin-bottom:52px;}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--orange-3);
-  letter-spacing:.16em;text-transform:uppercase;font-family:'DM Sans',sans-serif;
-  opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:.1s;
-  margin-bottom:16px;
-}
-.eyebrow::before,.eyebrow::after{content:"";width:14px;height:1px;background:currentColor;opacity:.5;}
-
-.brand{display:inline-flex;align-items:center;gap:13px;}
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;gap:12px;padding:20px 26px;flex-wrap:wrap;}
 .brand-mark{
-  width:40px;height:40px;border-radius:12px;flex-shrink:0;
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
   background:linear-gradient(155deg, var(--orange-1), var(--orange-3));
-  box-shadow:0 6px 16px rgba(232,70,13,.32), inset 0 1px 0 rgba(255,255,255,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
   display:flex;align-items:center;justify-content:center;
   opacity:0;animation:markIn .6s var(--ease) forwards;animation-delay:.05s;
 }
-.brand-mark svg{width:21px;height:21px;}
-.brand-title{font-size:27px;font-weight:900;letter-spacing:-.02em;min-width:11.5em;text-align:left;}
-.brand-sub{margin-top:12px;font-size:13px;color:var(--sub);font-weight:600;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:.95s;}
+.brand-mark svg{width:18px;height:18px;}
+.brand-title{font-size:16px;font-weight:800;letter-spacing:-.01em;min-width:9.5em;}
+.brand-sub{margin-left:auto;font-size:11.5px;color:var(--sub);font-weight:600;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:.5s;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 @keyframes markIn{from{opacity:0;transform:scale(.7) rotate(-8deg);}to{opacity:1;transform:scale(1) rotate(0);}}
 
-/* ── TILES ── */
-.tiles{display:flex;flex-direction:column;gap:18px;}
-@media(min-width:680px){.tiles{flex-direction:row;}}
+/* ── SPLIT ── */
+.split{flex:1;display:flex;flex-direction:column;min-height:74vh;}
+@media(min-width:760px){.split{flex-direction:row;}}
 
-.tile{
-  position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;
-  padding:30px 28px;border-radius:22px;color:#fff;text-decoration:none;min-height:232px;
-  overflow:hidden;isolation:isolate;
-  border:1px solid rgba(255,255,255,.12);
-  opacity:0;transform:translateY(20px);
-  animation:tileIn .65s var(--ease) forwards;
-  transition:transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
+.panel{
+  position:relative;flex:1 1 0;min-height:280px;
+  display:flex;align-items:flex-end;color:#fff;text-decoration:none;overflow:hidden;
+  transition:flex-grow .45s var(--ease);
 }
-.tile::before{
-  content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,0) 40%);
-}
-.tile-orange{background:linear-gradient(150deg, var(--orange-1) 0%, var(--orange-2) 55%, var(--orange-3) 100%);}
-.tile-navy{background:linear-gradient(150deg, var(--navy-1) 0%, var(--navy-2) 55%, var(--navy-3) 100%);}
+@media(min-width:760px){.panel:hover{flex-grow:1.28;}}
 
-.tile:nth-of-type(1){animation-delay:.55s;}
-.tile:nth-of-type(2){animation-delay:.70s;}
-.tile-orange:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(232,70,13,.45);border-color:rgba(255,255,255,.28);}
-.tile-navy:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(11,17,32,.55);border-color:rgba(255,255,255,.28);}
-.tile:active{transform:translateY(-1px) scale(.985);}
+.panel-orange{background:linear-gradient(160deg, var(--orange-1) 0%, var(--orange-2) 55%, var(--orange-3) 100%);}
+.panel-navy{background:linear-gradient(160deg, var(--navy-1) 0%, var(--navy-2) 55%, var(--navy-3) 100%);}
 
-@keyframes tileIn{to{opacity:1;transform:translateY(0);}}
+.panel-bg-icon{position:absolute;right:-8%;bottom:-10%;width:52%;max-width:280px;opacity:.10;pointer-events:none;transition:transform .45s var(--ease);}
+.panel:hover .panel-bg-icon{transform:scale(1.06) rotate(-4deg);}
 
-.tile-top{display:flex;align-items:flex-start;justify-content:space-between;}
-.tile-icon{
-  width:44px;height:44px;border-radius:12px;flex-shrink:0;
-  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(2px);
-}
-.tile-icon svg{width:22px;height:22px;}
-.tile-tag{
+.panel-inner{position:relative;z-index:1;width:100%;padding:38px 32px 42px;}
+@media(min-width:760px){.panel-inner{padding:0 44px 56px;}}
+
+.panel-orange .panel-inner{opacity:0;transform:translateX(-22px);animation:slideInL .65s var(--ease) forwards;animation-delay:.35s;}
+.panel-navy .panel-inner{opacity:0;transform:translateX(22px);animation:slideInR .65s var(--ease) forwards;animation-delay:.5s;}
+@keyframes slideInL{to{opacity:1;transform:translateX(0);}}
+@keyframes slideInR{to{opacity:1;transform:translateX(0);}}
+
+.panel-tag{
   display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;
   background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);border-radius:20px;
-  padding:5px 11px;white-space:nowrap;letter-spacing:.01em;
+  padding:5px 11px;white-space:nowrap;margin-bottom:16px;
 }
-.tile-tag .dot{width:6px;height:6px;border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,.18);}
+.panel-tag .dot{width:6px;height:6px;border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,.18);}
 
-.tile-body{margin-top:24px;}
-.tile-body h2{font-size:21px;font-weight:800;letter-spacing:-.01em;}
-.tile-body p{font-size:12.5px;margin-top:7px;line-height:1.7;opacity:.82;max-width:26em;}
+.panel-title{font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:-.01em;line-height:1.15;}
+.panel-desc{font-size:13px;margin-top:10px;line-height:1.7;opacity:.82;max-width:24em;}
 
-.tile-foot{display:flex;align-items:center;gap:6px;align-self:flex-end;margin-top:20px;font-size:12.5px;font-weight:700;}
-.tile-foot svg{width:15px;height:15px;transition:transform .22s var(--ease);}
-.tile:hover .tile-foot svg{transform:translateX(4px);}
+.panel-cta{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;font-weight:700;}
+.panel-cta svg{width:15px;height:15px;transition:transform .22s var(--ease);}
+.panel:hover .panel-cta svg{transform:translateX(4px);}
 
 /* ── FOOTER NOTE ── */
-.divider{margin:44px 0 22px;height:1px;background:linear-gradient(90deg, transparent, var(--faint), transparent);opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:1.0s;}
-.note{font-size:11.5px;color:var(--sub);line-height:1.8;text-align:center;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:1.05s;}
+.foot{padding:20px 26px 26px;}
+.note{font-size:11px;color:var(--sub);line-height:1.8;text-align:center;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:1.0s;}
 </style>
 </head>
 <body>
-<div class="stage">
 
-  <div class="hero">
-    <div class="eyebrow">営業支援ツール</div>
-    <div class="brand">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 3v7a2 2 0 0 0 4 0V3"/>
-          <path d="M9 10v11"/>
-          <path d="M17 3c-1.4 0-2.5 1.8-2.5 5.5S15.6 13 17 13s2.5-1 2.5-1V3"/>
-          <path d="M17 13v8"/>
-        </svg>
-      </span>
-      <h1 class="brand-title" data-scramble="食べログ営業ツール"></h1>
-    </div>
-    <p class="brand-sub">対象エリア：千葉・東京・神奈川・埼玉</p>
-  </div>
+  <header class="topbar">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 3v7a2 2 0 0 0 4 0V3"/>
+        <path d="M9 10v11"/>
+        <path d="M17 3c-1.4 0-2.5 1.8-2.5 5.5S15.6 13 17 13s2.5-1 2.5-1V3"/>
+        <path d="M17 13v8"/>
+      </svg>
+    </span>
+    <h1 class="brand-title" data-scramble="食べログ営業ツール"></h1>
+    <span class="brand-sub">対象エリア：千葉・東京・神奈川・埼玉</span>
+  </header>
 
-  <main class="tiles">
-    <a class="tile tile-orange" href="https://wa-ra-so.github.io/sinntenn/">
-      <div class="tile-top">
-        <span class="tile-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="M21 21l-4.3-4.3"/>
-          </svg>
+  <main class="split">
+    <a class="panel panel-orange" href="https://wa-ra-so.github.io/sinntenn/">
+      <svg class="panel-bg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M21 21l-4.3-4.3"/>
+      </svg>
+      <div class="panel-inner">
+        <span class="panel-tag"><span class="dot"></span>1日6回更新</span>
+        <h2 class="panel-title">新店<br>リサーチ</h2>
+        <p class="panel-desc">新規開店の飲食店をニュース・求人から自動収集し一覧表示</p>
+        <span class="panel-cta">開く
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </span>
-        <span class="tile-tag"><span class="dot"></span>1日6回更新</span>
       </div>
-      <div class="tile-body">
-        <h2>新店リサーチ</h2>
-        <p>新規開店の飲食店をニュース・求人から自動収集し一覧表示</p>
-      </div>
-      <span class="tile-foot">開く
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </span>
     </a>
 
-    <a class="tile tile-navy" href="https://wa-ra-so.github.io/hppzaiko/">
-      <div class="tile-top">
-        <span class="tile-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="4" width="12" height="17" rx="2"/>
-            <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
-            <path d="M9 11l2 2 4-4"/>
-          </svg>
+    <a class="panel panel-navy" href="https://wa-ra-so.github.io/hppzaiko/">
+      <svg class="panel-bg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4">
+        <rect x="6" y="4" width="12" height="17" rx="2"/>
+        <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
+        <path d="M9 11l2 2 4-4"/>
+      </svg>
+      <div class="panel-inner">
+        <span class="panel-tag"><span class="dot"></span>1時間おき更新</span>
+        <h2 class="panel-title">アタック<br>リスト</h2>
+        <p class="panel-desc">ネット予約不可・解約・新規掲載の店を検出し架電の優先度を可視化</p>
+        <span class="panel-cta">開く
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </span>
-        <span class="tile-tag"><span class="dot"></span>1時間おき更新</span>
       </div>
-      <div class="tile-body">
-        <h2>アタックリスト</h2>
-        <p>ネット予約不可・解約・新規掲載の店を検出し架電の優先度を可視化</p>
-      </div>
-      <span class="tile-foot">開く
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </span>
     </a>
   </main>
 
-  <div class="divider"></div>
-  <div class="note">
-    新店リサーチ・アタックリストは自動収集のため、掲載漏れ・誤検出が発生する場合があります。
+  <div class="foot">
+    <div class="note">新店リサーチ・アタックリストは自動収集のため、掲載漏れ・誤検出が発生する場合があります。</div>
   </div>
-
-</div>
 
 <script>
 function scrambleText(el, finalText, duration){
@@ -216,7 +167,7 @@ function scrambleText(el, finalText, duration){
 }
 
 document.querySelectorAll('[data-scramble]').forEach(function(el){
-  scrambleText(el, el.getAttribute('data-scramble'), 650);
+  scrambleText(el, el.getAttribute('data-scramble'), 600);
 });
 </script>
 </body>
