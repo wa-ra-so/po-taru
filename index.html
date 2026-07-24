@@ -15,9 +15,8 @@
   --navy-1:#1B2540;
   --navy-2:#101830;
   --navy-3:#080D1C;
-  --ink:#12172A;
+  --ink:#1a1310;
   --sub:#6b7280;
-  --faint:#e7e5e4;
   --paper:#FAF9F7;
   --ease:cubic-bezier(.16,1,.3,1);
 }
@@ -28,24 +27,33 @@ body{
   min-height:100vh;display:flex;flex-direction:column;
 }
 
-/* ── TOPBAR ── */
-.topbar{display:flex;align-items:center;gap:12px;padding:20px 26px;flex-wrap:wrap;}
-.brand-mark{
-  width:34px;height:34px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(155deg, var(--orange-1), var(--orange-3));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;animation:markIn .6s var(--ease) forwards;animation-delay:.05s;
+/* ── INTRO ── */
+.intro{
+  position:fixed;inset:0;z-index:100;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  transition:opacity .5s var(--ease), visibility .5s var(--ease);
 }
-.brand-mark svg{width:18px;height:18px;}
-.brand-title{font-size:16px;font-weight:800;letter-spacing:-.01em;min-width:9.5em;}
-.brand-sub{margin-left:auto;font-size:11.5px;color:var(--sub);font-weight:600;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:.5s;}
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.intro-mark{width:15vw;max-width:76px;min-width:44px;opacity:0;transform:translateY(10px) scale(.85);
+  animation:markReveal .5s var(--ease) forwards;animation-delay:.92s;
+}
+.intro-word{display:flex;font-size:clamp(34px,10vw,72px);font-weight:900;letter-spacing:-.01em;}
+.intro-word .ch{display:inline-block;opacity:0;animation:tumbleIn .68s cubic-bezier(.22,.9,.3,1.1) forwards;}
+.intro-word .ch:nth-child(1){animation-delay:.02s;}
+.intro-word .ch:nth-child(2){animation-delay:.13s;}
+.intro-word .ch:nth-child(3){animation-delay:.24s;}
+.intro-word .ch:nth-child(4){animation-delay:.35s;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-@keyframes markIn{from{opacity:0;transform:scale(.7) rotate(-8deg);}to{opacity:1;transform:scale(1) rotate(0);}}
+@keyframes tumbleIn{
+  0%{opacity:0;transform:translate(-50px,-70px) rotate(-75deg) scale(.45);}
+  55%{opacity:1;transform:translate(4px,4px) rotate(14deg) scale(1.06);}
+  78%{opacity:1;transform:translate(-2px,-1px) rotate(-6deg) scale(.98);}
+  100%{opacity:1;transform:translate(0,0) rotate(0) scale(1);}
+}
+@keyframes markReveal{to{opacity:1;transform:translateY(0) scale(1);}}
 
 /* ── SPLIT ── */
-.split{flex:1;display:flex;flex-direction:column;min-height:74vh;}
+.split{flex:1;display:flex;flex-direction:column;min-height:100vh;}
 @media(min-width:760px){.split{flex-direction:row;}}
 
 .panel{
@@ -64,8 +72,8 @@ body{
 .panel-inner{position:relative;z-index:1;width:100%;padding:38px 32px 42px;}
 @media(min-width:760px){.panel-inner{padding:0 44px 56px;}}
 
-.panel-orange .panel-inner{opacity:0;transform:translateX(-22px);animation:slideInL .65s var(--ease) forwards;animation-delay:.35s;}
-.panel-navy .panel-inner{opacity:0;transform:translateX(22px);animation:slideInR .65s var(--ease) forwards;animation-delay:.5s;}
+.panel-orange .panel-inner{opacity:0;transform:translateX(-22px);animation:slideInL .6s var(--ease) forwards;animation-delay:.15s;}
+.panel-navy .panel-inner{opacity:0;transform:translateX(22px);animation:slideInR .6s var(--ease) forwards;animation-delay:.3s;}
 @keyframes slideInL{to{opacity:1;transform:translateX(0);}}
 @keyframes slideInR{to{opacity:1;transform:translateX(0);}}
 
@@ -82,26 +90,20 @@ body{
 .panel-cta{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;font-weight:700;}
 .panel-cta svg{width:15px;height:15px;transition:transform .22s var(--ease);}
 .panel:hover .panel-cta svg{transform:translateX(4px);}
-
-/* ── FOOTER NOTE ── */
-.foot{padding:20px 26px 26px;}
-.note{font-size:11px;color:var(--sub);line-height:1.8;text-align:center;opacity:0;animation:fadeUp .5s var(--ease) forwards;animation-delay:1.0s;}
 </style>
 </head>
 <body>
 
-  <header class="topbar">
-    <span class="brand-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M7 3v7a2 2 0 0 0 4 0V3"/>
-        <path d="M9 10v11"/>
-        <path d="M17 3c-1.4 0-2.5 1.8-2.5 5.5S15.6 13 17 13s2.5-1 2.5-1V3"/>
-        <path d="M17 13v8"/>
-      </svg>
-    </span>
-    <h1 class="brand-title" data-scramble="食べログ営業ツール"></h1>
-    <span class="brand-sub">対象エリア：千葉・東京・神奈川・埼玉</span>
-  </header>
+  <div class="intro" id="intro">
+    <svg class="intro-mark" viewBox="0 0 100 100" fill="none">
+      <path d="M12 18 L68 62" stroke="var(--orange-2)" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M23 10 L76 55" stroke="var(--orange-2)" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M56 52 Q50 41 63 39 Q80 37 87 53 Q92 67 79 75 Q64 83 54 71 Q47 62 56 52 Z" fill="var(--ink)"/>
+    </svg>
+    <div class="intro-word">
+      <span class="ch">食</span><span class="ch">べ</span><span class="ch">ロ</span><span class="ch">グ</span>
+    </div>
+  </div>
 
   <main class="split">
     <a class="panel panel-orange" href="https://wa-ra-so.github.io/sinntenn/">
@@ -127,7 +129,7 @@ body{
       </svg>
       <div class="panel-inner">
         <span class="panel-tag"><span class="dot"></span>1時間おき更新</span>
-        <h2 class="panel-title">アタック<br>リスト</h2>
+        <h2 class="panel-title">HPP在庫<br>不可リスト</h2>
         <p class="panel-desc">ネット予約不可・解約・新規掲載の店を検出し架電の優先度を可視化</p>
         <span class="panel-cta">開く
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
@@ -136,39 +138,19 @@ body{
     </a>
   </main>
 
-  <div class="foot">
-    <div class="note">新店リサーチ・アタックリストは自動収集のため、掲載漏れ・誤検出が発生する場合があります。</div>
-  </div>
-
 <script>
-function scrambleText(el, finalText, duration){
-  var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789';
-  var start = null;
-  function frame(now){
-    if(start === null) start = now;
-    var t = Math.min(1, (now - start) / duration);
-    var revealCount = t * finalText.length;
-    var out = '';
-    for(var i = 0; i < finalText.length; i++){
-      if(revealCount > i + Math.random() * 2.4){
-        out += finalText[i];
-      } else {
-        out += chars[Math.floor(Math.random() * chars.length)];
-      }
-    }
-    el.textContent = out;
-    if(t < 1){
-      requestAnimationFrame(frame);
-    } else {
-      el.textContent = finalText;
-    }
+(function(){
+  var intro = document.getElementById('intro');
+  if(sessionStorage.getItem('portalIntroPlayed')){
+    intro.style.display = 'none';
+    return;
   }
-  requestAnimationFrame(frame);
-}
-
-document.querySelectorAll('[data-scramble]').forEach(function(el){
-  scrambleText(el, el.getAttribute('data-scramble'), 600);
-});
+  setTimeout(function(){
+    intro.classList.add('hide');
+    sessionStorage.setItem('portalIntroPlayed', '1');
+    setTimeout(function(){ intro.style.display = 'none'; }, 520);
+  }, 1750);
+})();
 </script>
 </body>
 </html>
