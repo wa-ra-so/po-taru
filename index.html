@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食べログ営業ツール ポータル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --orange:#FF5A1F;
+  --navy:#10192E;
+  --ink:#10192E;
+  --sub:#6b7280;
+  --paper:#ffffff;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{font-family:'DM Sans','Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;}
+
+.stage{max-width:720px;margin:0 auto;padding:72px 20px 48px;}
+
+/* ── HERO ── */
+.hero{text-align:center;margin-bottom:44px;}
+.brand{display:inline-flex;align-items:center;gap:12px;}
+.brand-icon{font-size:32px;line-height:1;}
+.brand-title{font-size:26px;font-weight:900;letter-spacing:-.02em;min-width:11em;}
+.brand-sub{margin-top:10px;font-size:13px;color:var(--sub);font-weight:600;opacity:0;animation:fadeIn .5s var(--ease) forwards;animation-delay:.9s;}
+
+@keyframes fadeIn{to{opacity:1;}}
+
+/* ── TILES ── */
+.tiles{display:flex;flex-direction:column;gap:16px;}
+@media(min-width:640px){.tiles{flex-direction:row;}}
+
+.tile{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:28px 26px;border-radius:20px;color:#fff;text-decoration:none;min-height:216px;
+  opacity:0;transform:translateY(18px);
+  animation:tileIn .6s var(--ease) forwards;
+  transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.tile:nth-of-type(1){animation-delay:.55s;}
+.tile:nth-of-type(2){animation-delay:.72s;}
+.tile:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(16,25,46,.18);}
+.tile:active{transform:translateY(-1px) scale(.98);}
+
+@keyframes tileIn{to{opacity:1;transform:translateY(0);}}
+
+.tile-orange{background:var(--orange);}
+.tile-navy{background:var(--navy);}
+
+.tile-top{display:flex;align-items:center;justify-content:space-between;}
+.tile-icon{font-size:26px;line-height:1;}
+.tile-tag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);border-radius:20px;padding:4px 10px;white-space:nowrap;}
+.tile-tag .dot{width:6px;height:6px;border-radius:50%;background:#fff;flex-shrink:0;}
+
+.tile-body{margin-top:22px;}
+.tile-body h2{font-size:22px;font-weight:800;letter-spacing:-.01em;}
+.tile-body p{font-size:12.5px;margin-top:6px;line-height:1.65;opacity:.86;}
+
+.tile-arrow{align-self:flex-end;font-size:20px;font-weight:700;margin-top:18px;transition:transform .18s var(--ease);}
+.tile:hover .tile-arrow{transform:translateX(4px);}
+
+/* ── FOOTER ── */
+.foot{margin-top:40px;text-align:center;opacity:0;animation:fadeIn .5s var(--ease) forwards;animation-delay:1.05s;}
+.foot a{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:10px;padding:9px 16px;display:inline-block;transition:background .15s var(--ease), color .15s var(--ease);}
+.foot a:hover{background:var(--ink);color:#fff;}
+
+.note{margin-top:32px;font-size:11px;color:var(--sub);line-height:1.8;text-align:center;opacity:0;animation:fadeIn .5s var(--ease) forwards;animation-delay:1.05s;}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="hero">
+    <div class="brand">
+      <span class="brand-icon">🍴</span>
+      <h1 class="brand-title" data-scramble="食べログ営業ツール"></h1>
+    </div>
+    <p class="brand-sub">対象エリア：千葉・東京・神奈川・埼玉</p>
+  </div>
+
+  <main class="tiles">
+    <a class="tile tile-orange" href="https://wa-ra-so.github.io/sinntenn/">
+      <div class="tile-top">
+        <span class="tile-icon">🔍</span>
+        <span class="tile-tag"><span class="dot"></span>1日6回更新</span>
+      </div>
+      <div class="tile-body">
+        <h2>新店リサーチ</h2>
+        <p>新規開店の飲食店をニュース・求人から自動収集</p>
+      </div>
+      <span class="tile-arrow">→</span>
+    </a>
+
+    <a class="tile tile-navy" href="https://wa-ra-so.github.io/hppzaiko/">
+      <div class="tile-top">
+        <span class="tile-icon">📋</span>
+        <span class="tile-tag"><span class="dot"></span>1時間おき更新</span>
+      </div>
+      <div class="tile-body">
+        <h2>アタックリスト</h2>
+        <p>ネット予約不可・解約・新規掲載の店を検出</p>
+      </div>
+      <span class="tile-arrow">→</span>
+    </a>
+  </main>
+
+  <div class="foot">
+    <a href="https://wa-ra-so.github.io/sinntenn/seiseikun.html">📝 提案書セイセイ君</a>
+  </div>
+
+  <div class="note">
+    新店リサーチ・アタックリストは自動収集のため、掲載漏れ・誤検出が発生する場合があります。
+  </div>
+
+</div>
+
+<script>
+function scrambleText(el, finalText, duration){
+  var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789';
+  var start = null;
+  function frame(now){
+    if(start === null) start = now;
+    var t = Math.min(1, (now - start) / duration);
+    var revealCount = t * finalText.length;
+    var out = '';
+    for(var i = 0; i < finalText.length; i++){
+      if(revealCount > i + Math.random() * 2.4){
+        out += finalText[i];
+      } else {
+        out += chars[Math.floor(Math.random() * chars.length)];
+      }
+    }
+    el.textContent = out;
+    if(t < 1){
+      requestAnimationFrame(frame);
+    } else {
+      el.textContent = finalText;
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+document.querySelectorAll('[data-scramble]').forEach(function(el){
+  scrambleText(el, el.getAttribute('data-scramble'), 650);
+});
+</script>
+</body>
+</html>
