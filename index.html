@@ -85,10 +85,15 @@ body{
 
 .panel-white{color:var(--ink);}
 
-.panel-bg-icon{position:absolute;bottom:-10%;width:52%;max-width:280px;opacity:.10;pointer-events:none;transition:transform .45s var(--ease);}
-.panel-orange .panel-bg-icon{left:-8%;}
-.panel-white .panel-bg-icon{right:-8%;opacity:.12;}
-.panel:hover .panel-bg-icon{transform:scale(1.06) rotate(-4deg);}
+.panel-mark{
+  position:absolute;bottom:-11%;font-family:'Noto Sans JP',sans-serif;font-weight:900;
+  font-size:min(46vw,360px);line-height:1;opacity:.08;pointer-events:none;user-select:none;
+  transition:transform .3s var(--ease), opacity .3s var(--ease);
+  will-change:transform;
+}
+.panel-orange .panel-mark{left:-4%;color:#fff;}
+.panel-white .panel-mark{right:-4%;color:var(--orange-2);opacity:.10;}
+.panel:hover .panel-mark{opacity:.16;}
 
 .panel-inner{position:relative;z-index:1;width:100%;padding:38px 32px 42px;}
 @media(min-width:760px){.panel-inner{padding:0 44px 56px;}}
@@ -127,10 +132,7 @@ body{
 
   <main class="split">
     <a class="panel panel-orange" href="https://wa-ra-so.github.io/sinntenn/">
-      <svg class="panel-bg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4">
-        <circle cx="11" cy="11" r="7"/>
-        <path d="M21 21l-4.3-4.3"/>
-      </svg>
+      <span class="panel-mark">新</span>
       <div class="panel-inner">
         <span class="panel-tag"><span class="dot"></span>1日6回更新</span>
         <h2 class="panel-title">新店<br>リサーチ</h2>
@@ -142,11 +144,7 @@ body{
     </a>
 
     <a class="panel panel-white" href="https://wa-ra-so.github.io/hppzaiko/">
-      <svg class="panel-bg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--orange-2)" stroke-width="1.4">
-        <rect x="6" y="4" width="12" height="17" rx="2"/>
-        <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
-        <path d="M9 11l2 2 4-4"/>
-      </svg>
+      <span class="panel-mark">庫</span>
       <div class="panel-inner">
         <span class="panel-tag"><span class="dot"></span>1時間おき更新</span>
         <h2 class="panel-title">HPP在庫<br>不可リスト</h2>
@@ -159,6 +157,22 @@ body{
   </main>
 
 <script>
+(function(){
+  document.querySelectorAll('.panel').forEach(function(panel){
+    var mark = panel.querySelector('.panel-mark');
+    if(!mark) return;
+    panel.addEventListener('mousemove', function(e){
+      var r = panel.getBoundingClientRect();
+      var mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      var my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      mark.style.transform = 'translate(' + (mx * 18) + 'px, ' + (my * 18) + 'px) scale(1.04)';
+    });
+    panel.addEventListener('mouseleave', function(){
+      mark.style.transform = '';
+    });
+  });
+})();
+
 (function(){
   var intro = document.getElementById('intro');
   if(sessionStorage.getItem('portalIntroPlayed')){
