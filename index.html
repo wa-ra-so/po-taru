@@ -126,7 +126,13 @@ body{
 .panel-white .panel-tag{background:rgba(26,19,16,.05);border-color:rgba(26,19,16,.14);}
 .panel-white .panel-tag .dot{background:var(--orange-2);box-shadow:0 0 0 3px rgba(255,90,31,.16);}
 
-.panel-title{font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:-.01em;line-height:1.15;}
+.panel-title{
+  font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:-.01em;line-height:1.15;
+  transform-origin:left bottom;
+  transition:transform .4s var(--ease);
+}
+.panel-white .panel-title{transform-origin:right bottom;}
+.panel:hover .panel-title{transform:scale(1.09);}
 .panel-desc{font-size:13px;margin-top:10px;line-height:1.7;opacity:.82;max-width:24em;}
 .panel-white .panel-desc{margin-left:auto;opacity:.68;}
 
@@ -144,7 +150,7 @@ body{
   </div>
 
   <main class="split">
-    <a class="panel panel-orange" href="https://wa-ra-so.github.io/sinntenn/">
+    <a class="panel panel-orange" href="https://wa-ra-so.github.io/sinntenn/" target="_blank" rel="noopener noreferrer">
       <span class="spot spot-left"></span>
       <div class="panel-inner">
         <span class="panel-tag"><span class="dot"></span>1日6回更新</span>
@@ -156,7 +162,7 @@ body{
       </div>
     </a>
 
-    <a class="panel panel-white" href="https://wa-ra-so.github.io/hppzaiko/">
+    <a class="panel panel-white" href="https://wa-ra-so.github.io/hppzaiko/" target="_blank" rel="noopener noreferrer">
       <span class="spot spot-right"></span>
       <div class="panel-inner">
         <span class="panel-tag"><span class="dot"></span>1時間おき更新</span>
